@@ -1,28 +1,46 @@
 <template>
+
+<section>
+
+  <v-header :user="user"></v-header>
+
+
   <el-row class="container" style="height: 100%">
-    <v-header :user="user"></v-header>
 
 
-    <el-col :span="24" class="main">
-      <el-row>
-        <el-menu :default-active="$route.path" class="mar-l el-menu-vertical-demo el-col el-col-3" light router>
-          <template v-for="(item,index) in $router.options.routes[0].children" v-if="!item.hidden">
-            <el-menu-item :index="item.path" ><i class="fa" :class="item.class"></i>{{item.name}}</el-menu-item>
-          </template>
-        </el-menu>
-        <section class="contentCon">
-          <el-col :span="21" :offset="3" class="content-wrapper">
-            <transition>
-              <router-view></router-view>
-            </transition>
-          </el-col>
-        </section>
-      </el-row>
-    </el-col>
+   <div id="wapper" class="wrapper">
+        <div id="main-content" class="main-content">
+          <el-col :span="24" class="main">
+                <el-row>
+                  <el-menu :default-active="$route.path" class="mar-l el-menu-vertical-demo el-col el-col-3" light router>
+                    <template v-for="(item,index) in $router.options.routes[0].children" v-if="!item.hidden">
+                      <el-menu-item :index="item.path" ><i class="fa" :class="item.class"></i>{{item.name}}</el-menu-item>
+                    </template>
+                  </el-menu>
+                  <section class="contentCon">
+                    <el-col :span="21" :offset="3" class="content-wrapper">
+                      <transition>
+                        <router-view></router-view>
+                      </transition>
+                    </el-col>
+                  </section>
+                </el-row>
+             </el-col>     
+        </div>
 
-    <v-foot ></v-foot>
+
+        <v-foot> </v-foot>
+
+   </div>
 
   </el-row>
+
+    
+
+  </section>
+
+
+   
 
 
  
@@ -31,7 +49,7 @@
 </template>
 <script>
   import header from './views/header/header.vue';
-  import foot from './views/foot/foot.vue';
+   import foot from './views/foot/foot.vue';
 
 
 
@@ -57,7 +75,7 @@
     },
     components: {
       'v-header': header,
-      'v-foot': foot
+       'v-foot': foot
     }
   };
 </script>
@@ -101,6 +119,16 @@
   .container .content-wrapper {
     padding: 20px;
   }
+  .wapper{
+
+    position: relative;
+    height: auto;
+    min-height: 100%;
+  }
+  .main-content{
+    padding-bottom: 60px;
+  }
+    
 
 </style>
 

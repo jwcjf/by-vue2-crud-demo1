@@ -14,7 +14,11 @@
 </script>
 <style>
 
-footer{
+
+
+footer {
+    /*border: 1px red solid;*/
+   
 	height: 50px;
 	width: 100%;
 	background-color: #FFFFFF;
@@ -22,7 +26,8 @@ footer{
 	text-align: center;
 	box-sizing: border-box;
 	border-top: 1px solid #CCCCCC;
-    bottom: 0 ;
+
+    
 }
 
  
