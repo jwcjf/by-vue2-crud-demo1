@@ -60,7 +60,7 @@
             </el-pagination>
         </div> -->
 
-        <div align="center">
+        <!-- <div align="center">
               <el-pagination
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
@@ -70,7 +70,21 @@
                   layout="total, sizes, prev, pager, next, jumper"
                   :total="totalCount">
               </el-pagination>
-          </div>
+          </div> -->
+
+           <div class="block">
+              <!-- <span class="demonstration">完整功能</span> -->
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size="pageSize"
+                :page-count="pagecount"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="40">
+              </el-pagination>
+            </div>
 
 
 
@@ -130,7 +144,9 @@
         //搜索条件
         criteria: '',
         //默认每页数据量
-        pagesize: 10,
+        pageSize: 5,
+    //默认每页数据量
+        pagecount: 10,
 
         //默认高亮行数据id
         highlightId: -1,
@@ -153,6 +169,10 @@
           date: '',
         },
         currentPage: 1,
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4,
         table_index: 1,
         mybuttonname: {
           name: '修改'
@@ -160,18 +180,12 @@
       };
     },
     created () {
-      //this.tableData = tableData; 
-      
-
-
+      //this.tableData = tableData;
        //this.$http.get('/api/getTable').then((response) => {
          // this.$http.get('./static/data.json').then((response) => {       
-      this.$http.get('http://localhost:3000/tableData').then((response) => {  
-       
+      this.$http.get('http://localhost:3000/tableData?_start=0&_end=10').then((response) => {       
         if (response.status === 200) {
-         // console.log(response.status);
-          this.tableData = response.data;
-          
+          this.tableData = response.data;          
         }
       });
 
@@ -188,6 +202,9 @@
           this.places = response.places;
         }
       });
+
+
+
     },
     methods: {
 
@@ -323,11 +340,34 @@
         obj.download = "download.csv";
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+        this.pageSize = val ;
+
+        // console.log(`每页 ${val} 条`);
+        // this.$http.get('http://localhost:3000/tableData?_start=0&_end=10').then((response) => {       
+        //   if (response.status === 200) {
+        //     this.tableData = response.data;          
+        //   }
+        // });
+
+
       },
       handleCurrentChange(val) {
         this.currentPage = val;
         console.log(`当前页: ${val}`);
+        var start = (val -1) *  this.pageSize ;
+        var endpage = val  * this.pageSize;
+
+        console.log(`start: ${start}`);  
+        console.log(`endpage: ${endpage}`);  
+        
+              
+      
+        this.$http.get(`http://localhost:3000/tableData?_start=${start}&_end=${endpage}`).then((response) => {       
+          if (response.status === 200) {
+            this.tableData = response.data;          
+          }
+        });
+
       }
     }
   };

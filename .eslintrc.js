@@ -39,8 +39,9 @@ module.exports = {
     "key-spacing":0,
     "space-before-blocks":0,
     "no-dupe-keys":0,
+    "space-infix-ops":0,
     
-
+    
     
     
 

@@ -6,6 +6,8 @@ power by @cjf
 ## Build Setup
 
 ``` bash
+# install json-server dependencies
+npm install -g json-server
 
 
 
